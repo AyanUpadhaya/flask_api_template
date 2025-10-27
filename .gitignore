@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+instance/
+instance_backup/
+
+# Flask SQLite DB
+*.sqlite3
+db.sqlite3
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
