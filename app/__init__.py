@@ -24,7 +24,17 @@ def create_app():
     from app.views.main_view import main_blueprint
     from app.views.user_view import user_blueprint
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(user_blueprint)
+    app.register_blueprint(user_blueprint, url_prefix='/api/v1')
+
+    # 🔧 Custom 404 handler
+    from flask import request, jsonify, render_template
+
+    @app.errorhandler(404)
+    def not_found(error):
+        # Return JSON for API routes
+        if request.path.startswith('/api') or request.path.startswith('/users'):
+            return jsonify({"error": "API endpoint not found"}), 404
+        # Return HTML for regular pages
+        return render_template("404.html"), 404
 
     return app
-
