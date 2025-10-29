@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Flask Server</title>
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <h1>✅ Flask Server is Running!</h1>
     <p>Welcome to your REST API built with Flask and MVC architecture.</p>
-</body>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
 </html>
