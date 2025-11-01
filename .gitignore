@@ -13,6 +13,7 @@ __pycache__/
 venv/
 ENV/
 env/
+migrations/
 .venv/
 instance/
 instance_backup/
@@ -34,3 +35,4 @@ Thumbs.db
 
 # Environment variables
 .env
+.env.production
