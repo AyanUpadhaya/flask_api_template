@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.controllers.user_controller import get_all_users, create_user
+from app.controllers.user_controller import get_all_users, create_user, get_user_by_id
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -14,6 +14,14 @@ def add_user():
     user = create_user(data)
     return jsonify({'id': user.id, 'name': user.name, 'email': user.email}), 201
 
+# single user data
+@user_blueprint.route("/users/<int:user_id>", methods=['GET'])
+def single_user(user_id):
+    user = get_user_by_id(user_id)
+    if user:
+        return jsonify(user.to_dict())
+
+    return jsonify({'error': 'user not found'}), 404
 
 
 

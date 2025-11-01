@@ -9,3 +9,10 @@ def create_user(data):
     db.session.add(new_user)
     db.session.commit()
     return new_user
+
+def get_user_by_id(user_id):
+    user = User.query.get(user_id)
+    if user:
+       return user
+
+    return None
