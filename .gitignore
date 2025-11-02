@@ -17,6 +17,7 @@ migrations/
 .venv/
 instance/
 instance_backup/
+logs/
 
 # Flask SQLite DB
 *.sqlite3

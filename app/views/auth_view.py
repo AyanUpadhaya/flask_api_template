@@ -1,19 +1,28 @@
 from flask import Blueprint, request, jsonify
 from app.controllers.auth_controller import register_user, login_user
+from app.utils.errors import AppError
+from app.utils.response import success_response
 
-auth_blueprint = Blueprint('auth',__name__)
+auth_blueprint = Blueprint('auth', __name__)
 
 @auth_blueprint.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    user=register_user(data)
-    return jsonify({'id': user.id, 'email': user.email}), 201
+    if not data:
+        raise AppError("Missing JSON body", 400)
 
-@auth_blueprint.route("/login",methods=["POST"])
+    user = register_user(data)  # may raise AppError internally
+    return success_response({'id': user.id, 'email': user.email},"User registration successful",201)
+
+
+@auth_blueprint.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
+    if not data:
+        raise AppError("Missing JSON body", 400)
+
     token = login_user(data)
     if token:
-        return jsonify({'token': token}), 200
-    return jsonify({'error': 'Invalid credentials'}), 401
+        return success_response({'token': token},"User logged in successfully",201)
 
+    raise AppError("Invalid credentials", 401)
